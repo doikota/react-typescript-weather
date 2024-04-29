@@ -49,7 +49,7 @@ const App = () => {
           icon : data.current.condition.icon
         })
       })
-      .then(a => console.log(result))
+      console.log(result)
   }
 
   // Reactでは重要な設計コンセプトとして、Top-Down Data Flowを採用しており、これはデータの流れは一方通行、
