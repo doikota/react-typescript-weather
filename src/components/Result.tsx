@@ -15,11 +15,11 @@ const Result = (props : ResultProps) => {
     <h1><div>
       {props.result.country && 
         <div>
-          <div>{props.result.country}</div>
-          <div>{props.result.cityName}</div>
-          <div>{props.result.localtime}</div>
-          <div>{props.result.temperature}℃</div>
-          <div>
+          <div className="results-country">{props.result.country}</div>
+          <div className="results-city">{props.result.cityName}</div>
+          <div >{props.result.localtime}</div>
+          <div className="results-temp">{props.result.temperature}℃</div>
+          <div className="results-condition">
             <div>{props.result.conditionText}</div>
             <img src={props.result.icon} alt="icon"/>
           </div>

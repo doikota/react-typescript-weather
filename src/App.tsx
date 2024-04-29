@@ -31,7 +31,7 @@ const App = () => {
   })
 
   // APIを呼び出すための関数
-  const getWeather = (e:any) => {
+  const getWeather = (e : React.FormEvent<HTMLFormElement>) => {
     // form内でボタンを押したときのリロードを防止する
     e.preventDefault()
     // APIに渡すパラメータを組成する
@@ -56,10 +56,12 @@ const App = () => {
   // または上位から下位に向かうようにすることで、Appで定義したsetCityやgetWeatherをFormタグの属性の様に下位のコンポーネントに渡し、
   // データ処理をAppで集中管理するように仕向けている
   return (
-    <div> 
-      <Title/>
-      <Form setCity={setCity} getWeather={getWeather}/>
-      <Result result={result}/>
+    <div className="wrapper"> 
+      <div className="container">
+        <Title/>
+        <Form setCity={setCity} getWeather={getWeather}/>
+        <Result result={result}/>
+      </div>
     </div>
   )
 }
