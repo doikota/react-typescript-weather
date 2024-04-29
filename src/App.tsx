@@ -3,6 +3,7 @@ import { useState } from "react"
 
 import Title from './components/Title'
 import Form from './components/Form'
+import Result from './components/Result'
 
 // API呼び出しの結果を格納するオブジェクトの型
 type ResultState = {
@@ -52,6 +53,7 @@ const App = () => {
     <div> 
       <Title/>
       <Form setCity={setCity} getWeather={getWeather}/>
+      <Result result={result}/>
     </div>
   )
 }
