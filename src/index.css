@@ -22,7 +22,7 @@ body {
    display: flex;
    justify-content: center;
    align-items: center; 
-   background: url("./assets/IMG_0410.JPG") center center no-repeat;
+   background: url("./assets/background-image.jpg") center center no-repeat;
    background-size: cover;
 }
 
@@ -31,8 +31,8 @@ body {
     text-align: center;
     padding: 40px 20px;
     border-radius: 15px;
+    backdrop-filter: blur(20px);
     box-shadow: 4px 4px 13px 5px rgba(0,0,0,0.25);
-    backdrop-filter: blur(5px);
 }
 @media only screen and (max-width: 700px) {
     .container{
