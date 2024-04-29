@@ -8,13 +8,13 @@ const Form = (props : FormProps) => {
 
   // onChangeでテキストボックスの値を文字列としてsetCityを通じてcityに渡す
   return (
-    <form>
+    <form onSubmit={props.getWeather}>
       <input type="text" 
               name="city" 
               placeholder="都市名" 
               onChange={e => props.setCity(e.target.value)}>
       </input>
-      <button type="submit" onClick={props.getWeather}>天気を取得</button>
+      <button type="submit">天気を取得</button>
       {/* return の中でJavaScriptのコードを書くときは{}で囲む */}
     </form>
   )

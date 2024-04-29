@@ -3,6 +3,7 @@ type ResultProps = {
   result: {
     country : string
     cityName : string
+    localtime : string
     temperature : string
     conditionText : string
     icon : string
@@ -16,6 +17,7 @@ const Result = (props : ResultProps) => {
         <div>
           <div>{props.result.country}</div>
           <div>{props.result.cityName}</div>
+          <div>{props.result.localtime}</div>
           <div>{props.result.temperature}℃</div>
           <div>
             <div>{props.result.conditionText}</div>
