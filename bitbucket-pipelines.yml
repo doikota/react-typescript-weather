@@ -17,6 +17,7 @@ pipelines:
           - echo $IAM_ROLE_ARN
           # frontend
           - npm install -D webpack-cli
+          - npm run test
           - npm run build
           # container
           - docker build -t $CONTAINER .
