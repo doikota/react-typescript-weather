@@ -11,7 +11,7 @@ pipelines:
           # variables
           - export CONTAINER='doikota/weather-app'
           - export IMAGE_TAG='1.0.0'
-          - export IAM_ROLE_ARN='arn:aws:iam::718624127210:role/weather-openidconnect-role'
+          - export IAM_ROLE_ARN='arn:aws:iam::718624127210:role/golden-openidconnect-role'
           - echo $CONTAINER
           - echo $IMAGE_TAG
           - echo $IAM_ROLE_ARN
