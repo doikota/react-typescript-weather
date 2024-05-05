@@ -25,7 +25,6 @@ jobs:
           node-version: '20'
 
       - name: Build Client
-        working-directory: frontend
         run: |
           npm install -D webpack-cli
           npm run test
