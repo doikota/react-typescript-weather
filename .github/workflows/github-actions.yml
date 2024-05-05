@@ -1,0 +1,45 @@
+name: GitHub Actions for Weather
+run-name: ${{ github.actor }} is building up Weather Application
+on: [push]
+
+env:
+  CONTAINER: 'weather-app'
+  REPOSITORY: 'doikota/weather-app'
+  IMAGE_TAG: '1.0.1'
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Build Client
+        working-directory: frontend
+        run: |
+          npm install -D webpack-cli
+          npm run test
+          npm run build
+
+      - name: AWS Credential
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-northeast-1
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Build Container
+        run: |
+          docker build -t $CONTAINER .
+          docker tag $CONTAINER:latest $REPOSITORY:$IMAGE_TAG
+          docker push $REPOSITORY:$IMAGE_TAG
