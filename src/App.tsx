@@ -4,6 +4,7 @@ import { useState } from "react"
 import Title from './components/Title'
 import Form from './components/Form'
 import Result from './components/Result'
+import Weather from './components/Weather'
 
 // API呼び出しの結果を格納するオブジェクトの型
 type ResultState = {
@@ -30,26 +31,14 @@ const App = () => {
     icon : ""
   })
 
-  // APIを呼び出すための関数
-  const getWeather = (e : React.FormEvent<HTMLFormElement>) => {
+  // APIを呼び出すためのラッパー関数、formリロード抑止とresultステートの設定も行う
+  async function getWeather (e : React.FormEvent<HTMLFormElement>) {
     // form内でボタンを押したときのリロードを防止する
     e.preventDefault()
-    // APIに渡すパラメータを組成する
-    const param = "https://api.weatherapi.com/v1/current.json?key=60cc6fda7b27421a92e71655242804&q=" + city + "&aqi=no"
-    console.log(param)
-    // fetchはJavaScriptでAPIを呼び出すためのメソッド　thenで受け取った結果をvoid型の関数に引数resとして渡す
-    fetch(param)
-      .then(res => res.json())
-      .then(data => { setResult ({
-          country : data.location.country,
-          cityName : data.location.name,
-          localtime : data.location.localtime,
-          temperature : data.current.temp_c,
-          conditionText : data.current.condition.text,
-          icon : data.current.condition.icon
-        })
-      })
-      console.log(result)
+    // cityパラメータを渡し、APIの結果を得る
+    const res = await Weather(city)
+    console.log("Weather returned: " + JSON.stringify(res))
+    setResult(res)
   }
 
   // Reactでは重要な設計コンセプトとして、Top-Down Data Flowを採用しており、これはデータの流れは一方通行、
