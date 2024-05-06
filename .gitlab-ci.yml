@@ -2,6 +2,7 @@ variables:
   REGISTRY: ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
+  AWS_IAM_ROLE: arn:aws:iam::718624127210:oidc-provider/gitlab.com
 
 default:
   image: public.ecr.aws/sam/build-nodejs20.x
@@ -28,7 +29,6 @@ assume role:
       aud: https://gitlab.com
   script:
     - >
-      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
       $(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
