@@ -27,7 +27,7 @@ container:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   services:
-    - docker:24.0
+    - docker
   script:
     - >
       STS=($(aws sts assume-role-with-web-identity
