@@ -27,6 +27,7 @@ container:
   stage: Container
   image: docker:24.0
   services:
+  script:
     # - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REGISTRY
     - docker login --username AWS --password-stdin $REGISTRY
     - docker build . -t $REPOSITORY
