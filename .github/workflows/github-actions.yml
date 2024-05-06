@@ -62,4 +62,4 @@ jobs:
           push: true
           #tags: '$REPOSITORY:$IMAGE_TAG'
           tags: doikota/weather-app:1.0.1
-          context: '{{defaultContext}}:'
+          context: '{{defaultContext}}:dist'
