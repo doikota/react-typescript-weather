@@ -53,12 +53,12 @@ jobs:
         run: |
           docker build -t ${{ env.REPOSITORY }} .
           docker tag ${{ env.REPOSITORY }}:latest ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
-        # docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+          docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
 
       # コンテナイメージPush
-      - name: Push Container
-        uses: docker/build-push-action@v5
-        with:
-          push: true
-          context: .
-          tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+      # - name: Push Container
+      #   uses: docker/build-push-action@v5
+      #   with:
+      #     push: true
+      #     context: .
+      #     tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
