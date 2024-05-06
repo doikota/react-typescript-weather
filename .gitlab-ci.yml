@@ -8,19 +8,19 @@ default:
   image: public.ecr.aws/sam/build-nodejs20.x
 
 stages:
-  #  - Build
+  - Build
   - Assume
-#  - Container
+  - Container
 
-# build:
-#   stage: Build
-#   script:
-#     - npm install -D webpack-cli
-#     - npm run test
-#     - npm run build
-#   artifacts:
-#     paths:
-#       - dist/*
+build:
+  stage: Build
+  script:
+    - npm install -D webpack-cli
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/*
 
 assume role:
   stage: Assume
@@ -40,13 +40,13 @@ assume role:
     - export AWS_SECRET_ACCESS_KEY="${STS[1]}"
     - export AWS_SESSION_TOKEN="${STS[2]}"
     - aws sts get-caller-identity
-# container:
-#   stage: Container
-#   services:
-#     - docker:24.0
-#   script:
-#     - aws configure
-#     - aws ecr get-login-password --region ap-northeast-1
-#     - docker build . -t $REPOSITORY
-#     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
-#     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+
+container:
+  stage: Container
+  services:
+    - docker:24.0
+  script:
+    - aws ecr get-login-password --region ap-northeast-1
+    - docker build . -t $REPOSITORY
+    - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
+    - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
