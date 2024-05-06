@@ -27,8 +27,8 @@ assume:
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
-   image: amazon/aws-cli
-   script:
+  image: amazon/aws-cli
+  script:
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
