@@ -4,8 +4,7 @@ on: [push]
 
 env:
   REGISTRY: 718624127210.dkr.ecr.ap-northeast-1.amazonaws.com
-  CONTAINER: doikota/weather-app
-  REPOSITORY: $REGISTRY/$CONTAINER
+  REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.1
 
 permissions:
@@ -53,8 +52,8 @@ jobs:
       - name: Build Container
         run: |
           docker build -t $CONTAINER .
-          docker tag $CONTAINER:latest $REPOSITORY:$IMAGE_TAG
-        # docker push $REPOSITORY:$IMAGE_TAG
+          docker tag ${{ env.REPOSITORY }}:latest ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+        # docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
 
       # コンテナイメージPush
       - name: Push Container
@@ -62,4 +61,4 @@ jobs:
         with:
           push: true
           context: .
-          tags: ${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
