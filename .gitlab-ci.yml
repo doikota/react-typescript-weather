@@ -7,26 +7,43 @@ default:
   image: public.ecr.aws/sam/build-nodejs20.x
 
 stages:
-  - Build
-  - Container
+  #  - Build
+  - Assume
+#  - Container
 
-build:
-  stage: Build
-  script:
-    - npm install -D webpack-cli
-    - npm run test
-    - npm run build
-  artifacts:
-    paths:
-      - dist/*
+# build:
+#   stage: Build
+#   script:
+#     - npm install -D webpack-cli
+#     - npm run test
+#     - npm run build
+#   artifacts:
+#     paths:
+#       - dist/*
 
-container:
-  stage: Container
-  services:
-    - docker:24.0
+assume role:
+  stage: Assume
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
   script:
-    - aws configure
-    - aws ecr get-login-password --region ap-northeast-1
-    - docker build . -t $REPOSITORY
-    - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
-    - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
+    - >
+      export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
+      $(aws sts assume-role-with-web-identity
+      --role-arn ${AWS_IAM_ROLE}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
+      --output text))
+    - aws sts get-caller-identity
+# container:
+#   stage: Container
+#   services:
+#     - docker:24.0
+#   script:
+#     - aws configure
+#     - aws ecr get-login-password --region ap-northeast-1
+#     - docker build . -t $REPOSITORY
+#     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
+#     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
