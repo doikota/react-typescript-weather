@@ -29,7 +29,7 @@ assume role:
       aud: https://gitlab.com
   script:
     - >
-      $(aws sts assume-role-with-web-identity
+      STS=$(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
       --web-identity-token ${GITLAB_OIDC_TOKEN}
