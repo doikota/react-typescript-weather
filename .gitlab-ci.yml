@@ -11,10 +11,9 @@ stages:
 
 build:
   stage: Build
-  image: docker:24.0
+  image: node
   services:
-    - docker
-    - node
+    - docker:24.0
   script:
     - npm install -D webpack-cli
     - npm run test
