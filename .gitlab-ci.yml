@@ -9,6 +9,7 @@ default:
 
 stages:
   - Build
+  - Assume
   - Container
 
 build:
@@ -21,8 +22,8 @@ build:
     paths:
       - dist/*
 
-container:
-  stage: Container
+assume:
+  stage: Assume
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
@@ -42,6 +43,12 @@ container:
     - export AWS_SESSION_TOKEN="${STS[2]}"
     - aws sts get-caller-identity
     - aws ecr get-login-password --region ap-northeast-1
+
+container:
+  stage: Container
+  services:
+    - docker
+  script:
     - docker build . -t $REPOSITORY
     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
