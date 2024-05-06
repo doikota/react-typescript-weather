@@ -4,7 +4,7 @@ variables:
   IMAGE_TAG: 1.0.2
 
 default:
-  image: node
+  image: public.ecr.aws/sam/build-nodejs20.x
 
 stages:
   - Build
@@ -12,9 +12,6 @@ stages:
 
 build:
   stage: Build
-  image: node
-  services:
-    - docker:24.0
   script:
     - npm install -D webpack-cli
     - npm run test
@@ -25,10 +22,10 @@ build:
 
 container:
   stage: Container
-  image: public.ecr.aws/sam/build-nodejs20.x
   services:
     - docker:24.0
   script:
+    - aws configure
     - aws ecr get-login-password --region ap-northeast-1
     - docker build . -t $REPOSITORY
     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
