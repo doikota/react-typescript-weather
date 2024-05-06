@@ -11,7 +11,6 @@ default:
 stages:
   - Build
   - Assume
-  - Container
 
 build:
   stage: Build
@@ -44,13 +43,6 @@ assume:
     - export AWS_SESSION_TOKEN="${STS[2]}"
     - aws sts get-caller-identity
     - aws ecr get-login-password --region ap-northeast-1
-
-container:
-  stage: Container
-  image: docker:24.0
-  services:
-    - docker
-  script:
     - docker build . -t $REPOSITORY
     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
