@@ -55,4 +55,5 @@ jobs:
       - uses: docker/build-push-action@v5
         with:
           push: true
-          tags: '$REPOSITORY:$IMAGE_TAG'
+          #tags: '$REPOSITORY:$IMAGE_TAG'
+          tags: doikota/weather-app:1.0.1
