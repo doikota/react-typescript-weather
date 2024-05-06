@@ -3,8 +3,9 @@ run-name: ${{ github.actor }} is building up Weather Application
 on: [push]
 
 env:
-  CONTAINER: weather-app
-  REPOSITORY: doikota/weather-app
+  REGISTRY: 718624127210.dkr.ecr.ap-northeast-1.amazonaws.com
+  CONTAINER: doikota/weather-app
+  REPOSITORY: $REGISTRY/$CONTAINER
   IMAGE_TAG: 1.0.1
 
 permissions:
