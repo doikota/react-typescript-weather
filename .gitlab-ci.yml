@@ -8,11 +8,10 @@ default:
 
 stages:
   - Build
-  - Deploy
 
 build:
   stage: Build
-  image: docker:24.0
+  image: node
   services:
     - docker
   script:
