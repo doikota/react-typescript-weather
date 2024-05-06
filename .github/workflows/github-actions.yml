@@ -51,7 +51,7 @@ jobs:
       # コンテナビルド
       - name: Build Container
         run: |
-          docker build -t $CONTAINER .
+          docker build -t ${{ env.REPOSITORY }} .
           docker tag ${{ env.REPOSITORY }}:latest ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
         # docker push ${{ env.REGISTRY }}/${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
 
