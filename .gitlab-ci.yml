@@ -9,7 +9,6 @@ default:
 
 stages:
   - Build
-  - Assume
   - Container
 
 build:
@@ -22,11 +21,13 @@ build:
     paths:
       - dist/*
 
-assume role:
-  stage: Assume
+container:
+  stage: Container
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
+  services:
+    - docker:24.0
   script:
     - >
       STS=($(aws sts assume-role-with-web-identity
@@ -40,12 +41,6 @@ assume role:
     - export AWS_SECRET_ACCESS_KEY="${STS[1]}"
     - export AWS_SESSION_TOKEN="${STS[2]}"
     - aws sts get-caller-identity
-
-container:
-  stage: Container
-  services:
-    - docker:24.0
-  script:
     - aws ecr get-login-password --region ap-northeast-1
     - docker build . -t $REPOSITORY
     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
