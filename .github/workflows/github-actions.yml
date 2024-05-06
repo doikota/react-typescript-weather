@@ -25,8 +25,8 @@ jobs:
           node-version: 20
 
       # Buildx Setup がサブディレクトリ利用には必要
-      - name: Buildx Setup
-        uses: docker/setup-buildx-action@v3
+      # - name: Buildx Setup
+      #   uses: docker/setup-buildx-action@v3
 
       - name: Build Client
         run: |
