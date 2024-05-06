@@ -61,5 +61,5 @@ jobs:
         with:
           push: true
           #tags: '$REPOSITORY:$IMAGE_TAG'
-          tags: doikota/weather-app:1.0.1
-          context: '{{defaultContext}}:dist'
+          tags: ${{ env.CONTAINER }}:${{ env.IMAGE_TAG }}
+          context: '{{defaultContext}}:react-typescript-wheather-app'
