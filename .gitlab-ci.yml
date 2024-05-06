@@ -46,6 +46,7 @@ assume:
 
 container:
   stage: Container
+  image: docker:24.0
   services:
     - docker
   script:
