@@ -60,5 +60,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: ${{ env.CONTAINER }}:${{ env.IMAGE_TAG }}
           context: .
+          tags: ${{ env.REPOSITORY }}:${{ env.IMAGE_TAG }}
