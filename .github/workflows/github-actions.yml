@@ -44,6 +44,10 @@ jobs:
           role-to-assume: ${{ secrets.AWS_ASSUME_ROLE_ARN }}
           role-duration-seconds: 1200
 
+      # ECR認証
+      - name: ECR Login
+        uses: aws-actions/amazon-ecr-login@v1
+
       # コンテナビルド
       - name: Build Container
         run: |
@@ -51,14 +55,10 @@ jobs:
           docker tag $CONTAINER:latest $REPOSITORY:$IMAGE_TAG
         # docker push $REPOSITORY:$IMAGE_TAG
 
-      # ECR認証
-      - name: ECR Login
-        uses: aws-actions/amazon-ecr-login@v1
-
       # コンテナイメージPush
-      - name: Buildx Setup
+      - name: Push Container
         uses: docker/build-push-action@v5
         with:
           push: true
           tags: ${{ env.CONTAINER }}:${{ env.IMAGE_TAG }}
-          # context: '{{defaultContext}}:react-typescript-wheather-app'
+          context: .
