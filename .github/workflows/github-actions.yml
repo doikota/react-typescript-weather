@@ -3,9 +3,9 @@ run-name: ${{ github.actor }} is building up Weather Application
 on: [push]
 
 env:
-  CONTAINER: 'weather-app'
-  REPOSITORY: 'doikota/weather-app'
-  IMAGE_TAG: '1.0.1'
+  CONTAINER: weather-app
+  REPOSITORY: doikota/weather-app
+  IMAGE_TAG: 1.0.1
 
 permissions:
   id-token: write
@@ -22,7 +22,7 @@ jobs:
       - name: Setup
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: 20
 
       - name: Build Client
         run: |
@@ -52,7 +52,7 @@ jobs:
         uses: aws-actions/amazon-ecr-login@v1
 
       # コンテナイメージPush
-      - uses: docker/build-push-action@v2
+      - uses: docker/build-push-action@v5
         with:
           push: true
-          tags: $REPOSITORY:$IMAGE_TAG
+          tags: '$REPOSITORY:$IMAGE_TAG'
