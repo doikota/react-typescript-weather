@@ -2,7 +2,7 @@ variables:
   REGISTRY: ${AWS_ACCOUNT_ID}.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
-  AWS_IAM_ROLE: arn:aws:iam::718624127210:oidc-provider/gitlab.com
+  AWS_IAM_ROLE: arn:aws:iam::718624127210:role/gitlab-openidconnect-role
 
 default:
   image: public.ecr.aws/sam/build-nodejs20.x
