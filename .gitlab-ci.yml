@@ -29,7 +29,7 @@ assume:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   services:
-    - docker
+    - docker:dind
   script:
     - apk add --no-cache python3 py3-pip # AWS CLIのインストールに必要なパッケージをインストール
     - pip3 install --upgrade awscli # AWS CLIのインストール
