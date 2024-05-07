@@ -24,15 +24,15 @@ stages:
 
 assume:
   stage: Assume
-  image: python
+  # image: python
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   services:
     - docker:dind
   script:
-    - pip install --upgrade pip
-    - pip install --upgrade awscli
+    # - pip install --upgrade pip
+    # - pip install --upgrade awscli
     - curl -fsSL https://get.docker.com -o install-docker.sh
     - sh install-docker.sh
     - service docker start
