@@ -24,15 +24,18 @@ stages:
 
 assume:
   stage: Assume
-  image: docker:latest
+  image: python
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   services:
     - docker:dind
   script:
-    - apk add --no-cache python3 py3-pip # AWS CLIのインストールに必要なパッケージをインストール
-    - pip3 install --upgrade awscli # AWS CLIのインストール
+    - pip install --upgrade pip
+    - pip install --upgrade awscli
+    - curl -fsSL get.docker.com -o get-docker.sh
+    - sh get-docker.sh
+    - service docker start
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
