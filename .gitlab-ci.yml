@@ -41,7 +41,7 @@ assume:
     # - amazon-linux-extras install docker
     # - /usr/sbin/service docker start
     # - usermod -a -G docker ec2-user
-    - yum install curl
+    - apt-get install curl
     - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     - unzip awscliv2.zip
     - ./aws/install
