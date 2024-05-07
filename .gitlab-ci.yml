@@ -35,7 +35,7 @@ assume:
     - pip install --upgrade awscli
     - curl -fsSL get.docker.com -o get-docker.sh
     - sh get-docker.sh
-    - service start docker
+    - systemctl start docker
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
