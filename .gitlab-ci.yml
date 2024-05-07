@@ -26,7 +26,7 @@ assume:
   stage: Assume
   image:
     # name: amazon/aws-cli
-    name: docker
+    name: amazonlinux
     # entrypoint: ['']
   id_tokens:
     GITLAB_OIDC_TOKEN:
@@ -37,14 +37,13 @@ assume:
     # - curl -fsSL https://get.docker.com -o install-docker.sh
     # - sh install-docker.sh
     # - service docker start
-    # - yum update -y
-    # - amazon-linux-extras install docker
-    # - /usr/sbin/service docker start
+    - yum update -y
+    - amazon-linux-extras install docker
+    - /usr/sbin/service docker start
     # - usermod -a -G docker ec2-user
-    - apt-get install curl
-    - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-    - unzip awscliv2.zip
-    - ./aws/install
+    # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    # - unzip awscliv2.zip
+    # - ./aws/install
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
