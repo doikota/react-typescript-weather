@@ -38,7 +38,7 @@ assume:
     # - service docker start
     - yum update -y
     - amazon-linux-extras install docker
-    - service docker start
+    - systemctl start docker
     - usermod -a -G docker ec2-user
     - >
       STS=($(aws sts assume-role-with-web-identity
