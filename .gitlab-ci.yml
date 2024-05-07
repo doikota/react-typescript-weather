@@ -33,9 +33,13 @@ assume:
   script:
     # - pip install --upgrade pip
     # - pip install --upgrade awscli
-    - curl -fsSL https://get.docker.com -o install-docker.sh
-    - sh install-docker.sh
-    - service docker start
+    # - curl -fsSL https://get.docker.com -o install-docker.sh
+    # - sh install-docker.sh
+    # - service docker start
+    - sudo yum update -y
+    - sudo amazon-linux-extras install docker
+    - sudo service docker start
+    - sudo usermod -a -G docker ec2-user
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
