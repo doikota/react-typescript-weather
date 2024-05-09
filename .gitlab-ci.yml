@@ -27,7 +27,7 @@ assume:
   image:
     # name: amazon/aws-cli
     name: docker:cli
-    # entrypoint: ['']
+    entrypoint: ['']
   id_tokens:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
