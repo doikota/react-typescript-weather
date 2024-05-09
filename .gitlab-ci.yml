@@ -25,10 +25,10 @@ stages:
 assume:
   stage: Assume
   image:
-    name: amazon/aws-cli
+    # name: amazon/aws-cli
+    name: docker:dind
     name: public.ecr.aws/sam/build-nodejs20.x
     # name: docker:cli
-    name: docker:dind
     # entrypoint: ['']
   id_tokens:
     GITLAB_OIDC_TOKEN:
