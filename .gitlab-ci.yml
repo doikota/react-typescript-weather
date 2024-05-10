@@ -1,5 +1,7 @@
 variables:
-  # AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+  # AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID in Settings > CICD
+  # AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  # AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
   REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
@@ -24,9 +26,6 @@ assume:
   stage: Container
   image:
     name: docker:latest
-  # id_tokens:
-  #   GITLAB_OIDC_TOKEN:
-  #     aud: https://gitlab.com
   services:
     - docker:dind
   script:
