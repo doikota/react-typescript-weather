@@ -26,8 +26,8 @@ assume:
   stage: Assume
   image:
     # name: amazon/aws-cli
-    name: docker:dind
-    name: public.ecr.aws/sam/build-nodejs20.x
+    name: docker:latest
+    # name: public.ecr.aws/sam/build-nodejs20.x
     # name: docker:cli
     # entrypoint: ['']
   id_tokens:
@@ -48,6 +48,8 @@ assume:
     # - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
     # - unzip awscliv2.zip
     # - ./aws/install
+    - apk add --no-cache python3 py3-pip
+    - pip install awscli
     - >
       STS=($(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
