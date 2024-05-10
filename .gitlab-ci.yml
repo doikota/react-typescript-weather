@@ -1,12 +1,9 @@
 variables:
-  AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+  # AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
   REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
   AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
-
-default:
-  image: public.ecr.aws/sam/build-nodejs20.x
 
 stages:
   - Build
@@ -14,6 +11,7 @@ stages:
 
 build:
   stage: Build
+  image: public.ecr.aws/sam/build-nodejs20.x
   script:
     - npm install -D webpack-cli
     - npm run test
