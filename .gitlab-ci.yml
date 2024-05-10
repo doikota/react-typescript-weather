@@ -1,11 +1,11 @@
 variables:
   # AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID in Settings > CICD
-  # AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-  # AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  # AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID in Settings > CICD
+  # AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY in Settings > CICD
   REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
-  AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
+  # AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
 
 stages:
   - Build
