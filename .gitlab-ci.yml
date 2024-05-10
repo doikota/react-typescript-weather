@@ -1,16 +1,16 @@
 variables:
-  AWS_ACCOUNT_ID: 718624127210
-  REGISTRY: 718624127210.dkr.ecr.ap-northeast-1.amazonaws.com
+  AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID
+  REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.2
-  AWS_IAM_ROLE: arn:aws:iam::718624127210:role/gitlab-openidconnect-role
+  AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
 
 default:
   image: public.ecr.aws/sam/build-nodejs20.x
 
 stages:
   - Build
-  - Assume
+  - Container
 
 build:
   stage: Build
@@ -23,17 +23,17 @@ build:
       - dist/*
 
 assume:
-  stage: Assume
+  stage: Container
   image:
     name: docker:latest
-  id_tokens:
-    GITLAB_OIDC_TOKEN:
-      aud: https://gitlab.com
+  # id_tokens:
+  #   GITLAB_OIDC_TOKEN:
+  #     aud: https://gitlab.com
   services:
     - docker:dind
   script:
     - apk add --no-cache aws-cli
-    - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin 718624127210.dkr.ecr.ap-northeast-1.amazonaws.com
+    - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REGISTRY
     - docker build . -t $REPOSITORY
     - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
