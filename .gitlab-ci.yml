@@ -50,7 +50,6 @@ assume:
     - find . -name install
     - pwd
     - ls -al ./aws/install
-    - cd
     - sh ./aws/install
     - /usr/local/bin/aws --version
     # - apk add --no-cache python3 py3-pip
