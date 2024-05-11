@@ -34,13 +34,36 @@ container:
     - apk add --no-cache aws-cli
     - which bash
     - >
-      aws sts assume-role-with-web-identity
+      AWS_ACCESS_KEY_ID=$(aws sts assume-role-with-web-identity
       --role-arn ${AWS_IAM_ROLE}
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
       --web-identity-token ${GITLAB_OIDC_TOKEN}
       --duration-seconds 3600
-      --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
-      --output text
+      --query 'Credentials.[AccessKeyId]'
+      --output text)
+    - >
+      AWS_SECRET_ACCESS_KEY=$(aws sts assume-role-with-web-identity
+      --role-arn ${AWS_IAM_ROLE}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[SecretAccessKey]'
+      --output text)
+    - >
+      AWS_SESSION_TOKEN=$(aws sts assume-role-with-web-identity
+      --role-arn ${AWS_IAM_ROLE}
+      --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
+      --web-identity-token ${GITLAB_OIDC_TOKEN}
+      --duration-seconds 3600
+      --query 'Credentials.[SessionToken]'
+      --output text)
+    - echo AWS_ACCESS_KEY_ID
+    - echo AWS_SECRET_ACCESS_KEY
+    - echo AWS_SESSION_TOKEN
+    # - STS=(echo $STS)
+    # - export AWS_ACCESS_KEY_ID="${STS[0]}"
+    # - export AWS_SECRET_ACCESS_KEY="${STS[1]}"
+    # - export AWS_SESSION_TOKEN="${STS[2]}"
     - aws sts get-caller-identity
     - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REGISTRY
     # - docker build . -t $REPOSITORY
