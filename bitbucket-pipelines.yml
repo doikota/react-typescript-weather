@@ -1,22 +1,16 @@
 image: atlassian/default-image:4
 
 pipelines:
-  custom:
-    - variables:
-        - name: CONTAINER
-          default: doikota/weather-app
-        - name: IMAGE_TAG
-          default: 1.0.5
-
+  default:
     - step:
         services:
           - docker
         name: 'Install and Build'
         oidc: true
         script:
-          # # variables
-          # - export CONTAINER='doikota/weather-app'
-          # - export IMAGE_TAG='1.0.5'
+          # variables
+          - export CONTAINER=doikota/weather-app
+          - export IMAGE_TAG=1.0.5
           # frontend
           - npm install -D webpack-cli
           - npm run test
