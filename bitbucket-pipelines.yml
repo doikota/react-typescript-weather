@@ -10,11 +10,8 @@ pipelines:
         script:
           # variables
           - export CONTAINER='doikota/weather-app'
-          - export IMAGE_TAG='1.0.0'
-          - export IAM_ROLE_ARN='arn:aws:iam::718624127210:role/golden-openidconnect-role'
-          - echo $CONTAINER
-          - echo $IMAGE_TAG
-          - echo $IAM_ROLE_ARN
+          - export IMAGE_TAG='1.0.5'
+          # - export IAM_ROLE_ARN='arn:aws:iam::718624127210:role/golden-openidconnect-role'
           # frontend
           - npm install -D webpack-cli
           - npm run test
@@ -25,45 +22,7 @@ pipelines:
           # openid connect
           - pipe: atlassian/aws-ecr-push-image:2.3.0
             variables:
-              AWS_DEFAULT_REGION: 'ap-northeast-1'
-              AWS_OIDC_ROLE_ARN: $IAM_ROLE_ARN
+              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+              AWS_OIDC_ROLE_ARN: $AWS_IAM_ROLE_ARN
               IMAGE_NAME: $CONTAINER
               TAGS: $IMAGE_TAG
-        # name: Deploy
-        # script:
-        #   - pipe: atlassian/aws-eks-kubectl-run:2.8.0
-        #     variables:
-        #       CLUSTER_NAME: 'golden-cluster'
-        #       KUBECTL_COMMAND: 'apply'
-        #       RESOURCE_PATH: 'kubernetes/frontend-deployment.yml'
-        #       DEBUG: 'true'
-        #   - pipe: atlassian/aws-eks-kubectl-run:2.8.0
-        #     variables:
-        #       CLUSTER_NAME: 'golden-cluster'
-        #       KUBECTL_COMMAND: 'apply'
-        #       RESOURCE_PATH: 'kubernetes/frontend-service.yml'
-        #       DEBUG: 'true'
-        #   - pipe: atlassian/aws-eks-kubectl-run:2.8.0
-        #     variables:
-        #       CLUSTER_NAME: 'golden-cluster'
-        #       KUBECTL_COMMAND: 'apply'
-        #       RESOURCE_PATH: 'kubernetes/frontend-loadbalancer.yml'
-        #       DEBUG: 'true'
-        #   - pipe: atlassian/aws-eks-kubectl-run:2.8.0
-        #     variables:
-        #       CLUSTER_NAME: 'golden-cluster'
-        #       KUBECTL_COMMAND: 'apply'
-        #       RESOURCE_PATH: 'kubernetes/frontend-ingress.yml'
-        #       DEBUG: 'true'
-        #   - pipe: atlassian/aws-eks-kubectl-run:2.8.0
-        #     variables:
-        #       CLUSTER_NAME: 'golden-cluster'
-        #       KUBECTL_COMMAND: 'expose'
-        #       DEBUG: 'true'
-        #       KUBECTL_ARGS:
-        #         - 'deployment'
-        #         - 'frontend-deployment'
-        #         - '--type'
-        #         - 'LoadBalancer'
-        #         - '-n'
-        #         - 'golden-frontspace'
