@@ -11,14 +11,12 @@ pipelines:
           # variables
           - export CONTAINER='doikota/weather-app'
           - export IMAGE_TAG='1.0.5'
-          # - export IAM_ROLE_ARN='arn:aws:iam::718624127210:role/golden-openidconnect-role'
           # frontend
           - npm install -D webpack-cli
           - npm run test
           - npm run build
           # container
-          - docker build -t $CONTAINER .
-          - docker tag $CONTAINER:latest $CONTAINER:$IMAGE_TAG
+          - docker build -t $CONTAINER:$IMAGE_TAG .
           # openid connect
           - pipe: atlassian/aws-ecr-push-image:2.3.0
             variables:
