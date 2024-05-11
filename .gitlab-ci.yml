@@ -26,6 +26,9 @@ container:
     name: docker:latest
   services:
     - docker:dind
+  id_tokens:
+    GITLAB_OIDC_TOKEN:
+      aud: https://gitlab.com
   script:
     - apk add --no-cache aws-cli
     - >
