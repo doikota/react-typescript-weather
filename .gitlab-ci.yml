@@ -1,9 +1,9 @@
 variables:
   # AWS_ACCOUNT_ID: $AWS_ACCOUNT_ID in Settings > CICD
+  # AWS_IAM_ROLE_ARN: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
   REGISTRY: $AWS_ACCOUNT_ID.dkr.ecr.ap-northeast-1.amazonaws.com
   REPOSITORY: doikota/weather-app
   IMAGE_TAG: 1.0.6
-  AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
 
 stages:
   - Build
@@ -34,7 +34,7 @@ container:
     - >
       export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
       $(aws sts assume-role-with-web-identity
-      --role-arn ${AWS_IAM_ROLE}
+      --role-arn ${AWS_IAM_ROLE_ARN}
       --role-session-name "GitLabRunner-${CI_PROJECT_ID}-${CI_PIPELINE_ID}"
       --web-identity-token ${GITLAB_OIDC_TOKEN}
       --duration-seconds 3600
@@ -46,5 +46,4 @@ container:
     - aws sts get-caller-identity
     - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REGISTRY
     - docker build . -t $REGISTRY/$REPOSITORY:$IMAGE_TAG
-    # - docker tag $REPOSITORY:latest $REGISTRY/$REPOSITORY:$IMAGE_TAG
     - docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
