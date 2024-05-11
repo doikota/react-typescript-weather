@@ -20,7 +20,8 @@ pipelines:
           - npm run test
           - npm run build
           # container
-          - docker build -t $CONTAINER .
+          - echo $CONTAINER:$IMAGE_TAG
+          - docker build -t $CONTAINER:$IMAGE_TAG .
           # openid connect
           - pipe: atlassian/aws-ecr-push-image:2.3.0
             variables:
