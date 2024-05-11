@@ -22,7 +22,7 @@ build:
     paths:
       - dist/*
 
-assume:
+container:
   stage: Container
   image:
     name: docker:latest
