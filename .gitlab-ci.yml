@@ -57,9 +57,9 @@ container:
       --duration-seconds 3600
       --query 'Credentials.[SessionToken]'
       --output text)
-    - echo AWS_ACCESS_KEY_ID
-    - echo AWS_SECRET_ACCESS_KEY
-    - echo AWS_SESSION_TOKEN
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - echo $AWS_SESSION_TOKEN
     # - STS=(echo $STS)
     # - export AWS_ACCESS_KEY_ID="${STS[0]}"
     # - export AWS_SECRET_ACCESS_KEY="${STS[1]}"
