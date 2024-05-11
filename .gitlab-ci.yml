@@ -6,19 +6,19 @@ variables:
   AWS_IAM_ROLE: arn:aws:iam::$AWS_ACCOUNT_ID:role/gitlab-openidconnect-role
 
 stages:
-  # - Build
+  - Build
   - Container
 
-# build:
-#   stage: Build
-#   image: public.ecr.aws/sam/build-nodejs20.x
-#   script:
-#     - npm install -D webpack-cli
-#     - npm run test
-#     - npm run build
-#   artifacts:
-#     paths:
-#       - dist/*
+build:
+  stage: Build
+  image: public.ecr.aws/sam/build-nodejs20.x
+  script:
+    - npm install -D webpack-cli
+    - npm run test
+    - npm run build
+  artifacts:
+    paths:
+      - dist/*
 
 container:
   stage: Container
@@ -30,7 +30,6 @@ container:
     GITLAB_OIDC_TOKEN:
       aud: https://gitlab.com
   script:
-    # - apk add --no-cache bash
     - apk add --no-cache aws-cli
     - >
       export $(printf "AWS_ACCESS_KEY_ID=%s AWS_SECRET_ACCESS_KEY=%s AWS_SESSION_TOKEN=%s"
