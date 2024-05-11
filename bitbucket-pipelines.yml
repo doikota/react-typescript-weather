@@ -1,11 +1,13 @@
 image: atlassian/default-image:4
 
-variables:
-  CONTAINER: doikota/weather-app
-  IMAGE_TAG: 1.0.5
-
 pipelines:
   default:
+    - variables:
+      name: CONTAINER
+        - value: doikota/weather-app
+      name: IMAGE_TAG
+        - value: 1.0.5
+
     - step:
         services:
           - docker
