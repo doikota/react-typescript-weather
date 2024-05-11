@@ -4,9 +4,9 @@ pipelines:
   default:
     - variables:
       - name: CONTAINER
-        - default: doikota/weather-app
+        default: doikota/weather-app
       name: IMAGE_TAG
-        - default: 1.0.5
+        default: 1.0.5
 
     - step:
         services:
