@@ -1,27 +1,44 @@
 image: atlassian/default-image:4
 
-pipelines:
-  default:
-    - step:
-        services:
-          - docker
-        name: 'Install and Build'
-        oidc: true
+definitions:
+  steps:
+    - step: &build-step
+        name: SonarQube analysis
         script:
-          # variables
-          - export CONTAINER=doikota/weather-app
-          - export IMAGE_TAG=1.0.7
-          # frontend
-          - npm install -D webpack-cli
-          - npm run test
-          - npm run build
-          # container
-          - echo $CONTAINER:$IMAGE_TAG
-          - docker build -t $CONTAINER:$IMAGE_TAG .
-          # openid connect
-          - pipe: atlassian/aws-ecr-push-image:2.3.0
+          - pipe: sonarsource/sonarqube-scan:2.0.1
             variables:
-              AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
-              AWS_OIDC_ROLE_ARN: $AWS_IAM_ROLE_ARN
-              IMAGE_NAME: $CONTAINER
-              TAGS: $IMAGE_TAG
+              SONAR_HOST_URL: ${SONAR_HOST_URL} # Get the value from the repository/workspace variable.
+              SONAR_TOKEN: ${SONAR_TOKEN} # Get the value from the repository/workspace variable. You shouldn't set secret in clear text here.
+  caches:
+    sonar: ~/.sonar
+
+clone:
+  depth: full
+
+pipelines:
+  branches:
+    '{main}':
+      - step: *build-step
+      - step:
+          services:
+            - docker
+          name: 'Install and Build'
+          oidc: true
+          script:
+            # variables
+            - export CONTAINER=doikota/weather-app
+            - export IMAGE_TAG=1.0.7
+            # frontend
+            - npm install -D webpack-cli
+            - npm run test
+            - npm run build
+            # container
+            - echo $CONTAINER:$IMAGE_TAG
+            - docker build -t $CONTAINER:$IMAGE_TAG .
+            # openid connect
+            - pipe: atlassian/aws-ecr-push-image:2.3.0
+              variables:
+                AWS_DEFAULT_REGION: $AWS_DEFAULT_REGION
+                AWS_OIDC_ROLE_ARN: $AWS_IAM_ROLE_ARN
+                IMAGE_NAME: $CONTAINER
+                TAGS: $IMAGE_TAG
