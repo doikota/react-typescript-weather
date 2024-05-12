@@ -10,7 +10,7 @@ pipelines:
         script:
           # variables
           - export CONTAINER=doikota/weather-app
-          - export IMAGE_TAG=1.0.5
+          - export IMAGE_TAG=1.0.7
           # frontend
           - npm install -D webpack-cli
           - npm run test

@@ -40,9 +40,9 @@ container:
       --duration-seconds 3600
       --query 'Credentials.[AccessKeyId,SecretAccessKey,SessionToken]'
       --output text))
-    # - echo $AWS_ACCESS_KEY_ID
-    # - echo $AWS_SECRET_ACCESS_KEY
-    # - echo $AWS_SESSION_TOKEN
+    - echo $AWS_ACCESS_KEY_ID
+    - echo $AWS_SECRET_ACCESS_KEY
+    - echo $AWS_SESSION_TOKEN
     - aws sts get-caller-identity
     - aws ecr get-login-password --region ap-northeast-1 | docker login --username AWS --password-stdin $REGISTRY
     - docker build . -t $REGISTRY/$REPOSITORY:$IMAGE_TAG
