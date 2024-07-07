@@ -1,3 +1,5 @@
+import React from "react"
+
 // propsで渡されるResultの型props.result.の形で渡される
 type ResultProps = {
   result: {

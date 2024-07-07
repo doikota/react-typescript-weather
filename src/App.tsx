@@ -1,5 +1,5 @@
 // Reactでは画面に入力されたデータはstateと呼ばれる一時保管場所に格納し手利用する
-import { useState } from "react"
+import React, { useState } from "react"
 
 import Title from './components/Title'
 import Form from './components/Form'

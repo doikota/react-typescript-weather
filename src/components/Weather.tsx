@@ -1,4 +1,3 @@
-
 // APIを呼び出すための非同期関数
 async function Weather (city : string | undefined) {
   // APIに渡すパラメータを組成する

@@ -1,6 +1,8 @@
+import React from "react"
+
 type FormProps = {
   setCity : React.Dispatch<React.SetStateAction<string | undefined>>
-  getWeather : (e: any) => void
+  getWeather : (e: React.FormEvent<HTMLFormElement>) => void
 }
 
 // Appとのデータの受け渡しはpropsを通じて行う
