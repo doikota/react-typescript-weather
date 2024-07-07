@@ -6,7 +6,7 @@ async function Weather (city : string | undefined) {
   console.log("In Weather!")
   console.log(param)
 
-  // fetchはJavaScriptでAPIを呼び出すための非同期メソッドawaitで受け取った結果を
+  // fetchはJavaScriptでAPIを呼び出すための非同期メソッドで、結果の受け取りをawaitしてからJSONの形で入手する
   const res = await fetch(param)
   console.log(typeof res)
   const json = await res.json()
