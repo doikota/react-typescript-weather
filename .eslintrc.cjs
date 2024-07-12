@@ -15,7 +15,10 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  rules: {
+    'react/jsx-uses-react': [1],
+    'react/react-in-jsx-scope': [0],
+  },
   settings: {
     react: {
       version: 'detect',
