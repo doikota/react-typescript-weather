@@ -5,6 +5,7 @@ FROM nginx:1.25.3
 
 # index.htmlを上書き
 COPY dist/index.html /usr/share/nginx/html/index.html
+COPY dist/vite.svg /usr/share/nginx/html/vite.svg
 
 # assest/ディレクトリを丸ごとコピー
 WORKDIR /usr/share/nginx/html/

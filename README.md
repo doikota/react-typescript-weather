@@ -18,3 +18,14 @@ sonar-scanner
 SonarQube
 http://localhost:9000/
 ```
+
+## Docker を用いてコンテナ化したアプリを展開します。
+
+```
+npm run build
+docker build -t weather-app .
+docker run -dit --name weather-app -p 8080:80 weather-app
+
+Weather App
+http://localhost:8080/
+```
