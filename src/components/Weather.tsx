@@ -1,8 +1,9 @@
+import type { ResultState } from '../App'
+
 // APIを呼び出すための非同期関数
 async function Weather (city : string | undefined) {
   // APIに渡すパラメータを組成する
   const param = "https://api.weatherapi.com/v1/current.json?key=60cc6fda7b27421a92e71655242804&q=" + city + "&aqi=no"
-  console.log("In Weather!")
   console.log(param)
 
   // fetchはJavaScriptでAPIを呼び出すための非同期メソッドで、結果の受け取りをawaitしてからJSONの形で入手する
@@ -10,7 +11,7 @@ async function Weather (city : string | undefined) {
   console.log(typeof res)
   const json = await res.json()
   console.log("Awaited JSON is " + JSON.stringify(json))
-  const result = {
+  const result : ResultState = {
     country : json.location.country,
     cityName : json.location.name,
     localtime : json.location.localtime,

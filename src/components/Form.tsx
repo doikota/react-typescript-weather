@@ -1,20 +1,35 @@
-import React from "react"
+import React, { useState } from "react"
+import type { ResultState } from '../App'
+import Weather from './Weather'
 
 type FormProps = {
-  setCity : React.Dispatch<React.SetStateAction<string | undefined>>
-  getWeather : (e: React.FormEvent<HTMLFormElement>) => void
+  setResult : React.Dispatch<React.SetStateAction<ResultState>>
 }
+
+  // APIを呼び出すためのラッパー関数、formリロード抑止とresultステートの設定も行う
+  async function getWeather (e : React.FormEvent<HTMLFormElement>, city : string | undefined, setResult : React.Dispatch<React.SetStateAction<ResultState>>) {
+    // form内でボタンを押したときのリロードを防止する
+    e.preventDefault()
+    // cityパラメータを渡し、APIの結果を得る
+    const res: ResultState = await Weather(city)
+    console.log("Weather returned: " + JSON.stringify(res))
+    setResult(res)
+  }
+
 
 // Appとのデータの受け渡しはpropsを通じて行う
 const Form = (props : FormProps) => {
 
+  // cityはstate, setCityはstateのデータを操作する仕組み
+  const [city, setCity] = useState<string>()
+
   // onChangeでテキストボックスの値を文字列としてsetCityを通じてcityに渡す
   return (
-    <form onSubmit={props.getWeather}>
+    <form onSubmit={(e) => getWeather(e, city, props.setResult)}>
       <input type="text" 
               name="city" 
               placeholder="都市名" 
-              onChange={e => props.setCity(e.target.value)}>
+              onChange={(e) => setCity(e.target.value)}>
       </input>
       <button type="submit">天気を取得</button>
       {/* return の中でJavaScriptのコードを書くときは{}で囲む */}
