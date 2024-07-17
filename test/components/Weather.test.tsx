@@ -1,4 +1,4 @@
-import Weather from '../src/components/Weather';
+import Weather from '../../src/components/Weather';
 
 test('Weather', async () => {
   // 期待される戻り値を定義

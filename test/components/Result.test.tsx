@@ -2,7 +2,7 @@
 * @jest-environment jsdom
 */
 import React from 'react';
-import Result from '../src/components/Result';
+import Result from '../../src/components/Result';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 

@@ -3,8 +3,8 @@
 */
 import React, { useState } from "react"
 import { render, screen } from '@testing-library/react';
-import type { ResultState } from '../src/App'
-import Form from '../src/components/Form';
+import type { ResultState } from '../../src/App'
+import Form from '../../src/components/Form';
 import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
 import 'cross-fetch/polyfill'
