@@ -1,25 +1,32 @@
 /**
 * @jest-environment jsdom
 */
-import React, { useState } from "react"
-import { render, screen } from '@testing-library/react';
+import React, { useState, useEffect } from "react"
+import { render, screen, waitFor } from '@testing-library/react';
 import type { ResultState } from '../../src/App'
 import Form from '../../src/components/Form';
 import '@testing-library/jest-dom';
 import userEvent from "@testing-library/user-event";
 import 'cross-fetch/polyfill'
 
+const emptyResultState: ResultState = {
+  country : "",
+  cityName : "",
+  localtime : "",
+  temperature : "",
+  conditionText : "",
+  icon : ""
+};
+
 test('Formコンポーネントのテスト cityに値がセットされることを試験する', async () => {
+  let resultState: ResultState = emptyResultState; // resultを保持するための変数
   const FormTestComponent = () => { 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const [result, setResult] = useState<ResultState>({
-      country : "",
-      cityName : "",
-      localtime : "",
-      temperature : "",
-      conditionText : "",
-      icon : ""
-    })
+    const [result, setResult] = useState<ResultState>(emptyResultState)
+    // Formコンポーネントを操作した後にresultの値を参照できるようにする
+    useEffect(() => {
+      resultState = result; // テスト外の変数にresultの値を代入
+    }, [result]);
     return <Form setResult={setResult}  />
   };
   
@@ -29,12 +36,16 @@ test('Formコンポーネントのテスト cityに値がセットされるこ�
   // コンポーネントのHTML構造を確認する
   screen.debug();
   const textbox = screen.getByRole("textbox");
-  screen.debug(textbox);
-
   const button = screen.getByRole("button");
-  const user = userEvent.setup();
-  await user.click(button);
-  screen.debug(textbox);
 
-  // expect(city).toEqual("Yokohama"); // city
+  await waitFor(async () => {
+    await userEvent.type(textbox, "Tokyo");
+    await userEvent.tab();
+    await userEvent.click(button);
+  });
+
+  await waitFor(() => {
+    console.log(resultState);
+    expect(resultState.cityName).toEqual("Tokyo"); // cityName
+  });
 });
