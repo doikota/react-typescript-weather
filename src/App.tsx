@@ -1,7 +1,7 @@
 // Reactでは画面に入力されたデータはstateと呼ばれる一時保管場所に格納し手利用する
 import React, { useState } from "react"
 
-import Title from './components/Title'
+import { Title } from './components/Title'
 import Form from './components/Form'
 import Result from './components/Result'
 
@@ -32,10 +32,10 @@ const App = () => {
   // データ処理をAppで集中管理するように仕向けている
   return (
     <div className="wrapper"> 
-      <div className="container">
+      <div className="App">
         <Title/>
         <Form setResult={setResult} />
-        <Result result={result}/>
+        <Result result={result} />
       </div>
     </div>
   )

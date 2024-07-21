@@ -1,9 +1,11 @@
 import React from "react"
 
-const Title = () => {
+export const Title = () => {
   return (
-    <h1>React 世界の天気</h1>
+    <div  className="Title">
+    <h1>世界の天気</h1>
+    </div>
   )
 }
 
-export default Title
+export default Title;

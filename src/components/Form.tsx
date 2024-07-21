@@ -25,12 +25,12 @@ const Form = (props : FormProps) => {
 
   // onChangeでテキストボックスの値を文字列としてsetCityを通じてcityに渡す
   return (
-    <form onSubmit={(e) => getWeather(e, city, props.setResult)}>
+    <form className="Form" onSubmit={(e) => getWeather(e, city, props.setResult)}>
       <input type="text" 
-              name="city" 
-              placeholder="都市名" 
-              // 入力が完了して他の要素にフォーカスが移動した時
-              onChange={(e) => setCity(e.target.value)}>
+          name="city" 
+          placeholder="都市名" 
+          // 入力が完了して他の要素にフォーカスが移動した時
+          onChange={(e) => setCity(e.target.value)}>
       </input>
       <button type="submit">天気を取得</button>
       {/* return の中でJavaScriptのコードを書くときは{}で囲む */}

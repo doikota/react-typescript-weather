@@ -11,7 +11,7 @@ Local: http://localhost:5173/
 ## Jest と ESLint と SonarQube を用いて静的解析も行います。
 
 ```
-npm test -- --coverage
+npm test -- --coverage .
 eslint **/*.tsx  -f json -o report.json
 sonar-scanner
 

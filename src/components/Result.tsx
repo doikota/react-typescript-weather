@@ -14,9 +14,11 @@ type ResultProps = {
 
 const Result = (props : ResultProps) => {
   return (
-    <h1><div>
+    <div className="Result">
+    <h1>
+      <div>
       {props.result.country && 
-        <div>
+        <div> <p>現在の天気</p>
           <div className="results-country">{props.result.country}</div>
           <div className="results-city">{props.result.cityName}</div>
           <div >{props.result.localtime}</div>
@@ -27,7 +29,9 @@ const Result = (props : ResultProps) => {
           </div>
         </div>
       }
-    </div></h1>
+      </div>
+      </h1>
+    </div>
   )
 }
 

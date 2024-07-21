@@ -8,8 +8,8 @@ import '@testing-library/jest-dom';
 
 describe('Titleコンポーネントのテスト', () => {
   
-  // titleは"React 世界の天気"
-  const title = "React 世界の天気";
+  // titleは"世界の天気"
+  const title = "世界の天気";
 
   test('getBy… と queryBy… を用いて', () => {
 
