@@ -19,6 +19,12 @@ SonarQube
 http://localhost:9000/
 ```
 
+## airbnb も導入します
+
+```
+npm i -D eslint-config-airbnb eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
+```
+
 ## Docker を用いてコンテナ化したアプリを展開します。
 
 ```

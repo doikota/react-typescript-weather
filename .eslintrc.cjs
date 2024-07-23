@@ -5,7 +5,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended'],
+  extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:@typescript-eslint/recommended', 'airbnb'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -18,6 +18,8 @@ module.exports = {
   rules: {
     'react/jsx-uses-react': [1],
     'react/react-in-jsx-scope': [0],
+    'linebreak-style': ['error', 'windows'],
+    'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
   },
   settings: {
     react: {
