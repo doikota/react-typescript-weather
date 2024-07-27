@@ -2,17 +2,15 @@
 * @jest-environment jsdom
 */
 import React from 'react';
-import Title from '../../src/components/Title';
 import { render, screen } from '@testing-library/react';
+import Title from '../../src/components/Title.tsx';
 import '@testing-library/jest-dom';
 
 describe('Titleコンポーネントのテスト', () => {
-  
   // titleは"世界の天気"
-  const title = "世界の天気";
+  const title = '世界の天気';
 
   test('getBy… と queryBy… を用いて', () => {
-
     // Titleコンポーネントをレンダリング<body><div><Title /></div></body>
     render(<Title />);
     const getByText1 = screen.getByText(title);

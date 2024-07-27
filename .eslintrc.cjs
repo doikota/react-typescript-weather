@@ -20,6 +20,7 @@ module.exports = {
     'react/react-in-jsx-scope': [0],
     'linebreak-style': ['error', 'windows'],
     'react/jsx-filename-extension': ['error', { extensions: ['ts', 'tsx'] }],
+    'no-console': 'off',
   },
   settings: {
     react: {

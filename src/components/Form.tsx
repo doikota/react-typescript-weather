@@ -24,10 +24,12 @@ async function getWeather(
 function Form(props : FormProps) {
   // cityはstate, setCityはstateのデータを操作する仕組み
   const [city, setCity] = useState<string>();
+  // 予めsetResultを分割代入（airbnb推奨）
+  const { setResult } = props;
 
   // onChangeでテキストボックスの値を文字列としてsetCityを通じてcityに渡す
   return (
-    <form className="Form" onSubmit={(e) => getWeather(e, city, props.setResult)}>
+    <form className="Form" onSubmit={(e) => getWeather(e, city, setResult)}>
       <input
         type="text"
         name="city"

@@ -1,11 +1,11 @@
-import React from "react"
+import React from 'react';
 
-export const Title = () => {
+export function Title() {
   return (
-    <div  className="Title">
-    <h1>世界の天気</h1>
+    <div className="Title">
+      <h1>世界の天気</h1>
     </div>
-  )
+  );
 }
 
 export default Title;

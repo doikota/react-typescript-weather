@@ -2,8 +2,8 @@
 * @jest-environment jsdom
 */
 import React from 'react';
-import Result from '../../src/components/Result';
 import { render, screen } from '@testing-library/react';
+import Result from '../../src/components/Result.tsx';
 import '@testing-library/jest-dom';
 
 test('Result component', () => {
@@ -14,7 +14,7 @@ test('Result component', () => {
     localtime: '2024-07-11 12:00', // localtimeの例としてダミーの日時を設定
     temperature: '25',
     conditionText: 'Cloudy',
-    icon: 'dummy-icon-url'
+    icon: 'dummy-icon-url',
   };
 
   // Resultコンポーネントをレンダリング

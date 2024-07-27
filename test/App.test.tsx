@@ -4,8 +4,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
-import App from '../src/App';
+import App from '../src/App.tsx';
 
 describe('App component', () => {
   test('renders with initial state', () => {
