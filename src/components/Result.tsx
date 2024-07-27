@@ -1,7 +1,7 @@
 import React from 'react';
 
 // propsで渡されるResultの型props.result.の形で渡される
-type ResultProps = {
+interface ResultProps {
   result: {
     country : string
     cityName : string
@@ -12,7 +12,7 @@ type ResultProps = {
   }
 }
 
-function Result(props : ResultProps) {
+function Result(props : Readonly<ResultProps>) {
   const { result } = props;
   return (
     <div className="Result">

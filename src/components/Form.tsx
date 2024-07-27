@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import type { ResultState } from '../App';
 import Weather from './Weather.tsx';
 
-type FormProps = {
+interface FormProps {
   setResult : React.Dispatch<React.SetStateAction<ResultState>>
 }
 
@@ -21,7 +21,7 @@ async function getWeather(
 }
 
 // Appとのデータの受け渡しはpropsを通じて行う
-function Form(props : FormProps) {
+function Form(props : Readonly<FormProps>) {
   // cityはstate, setCityはstateのデータを操作する仕組み
   const [city, setCity] = useState<string>();
   // 予めsetResultを分割代入（airbnb推奨）
