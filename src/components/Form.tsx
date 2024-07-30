@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import type { ResultState } from '../App';
-import Weather from './Weather.tsx';
+import callWeatherApi from './Weather.tsx';
 
+// Formコンポーネントのpropsの型を定義
 interface FormProps {
   setResult : React.Dispatch<React.SetStateAction<ResultState>>
 }
@@ -15,8 +16,8 @@ async function getWeather(
   // form内でボタンを押したときのリロードを防止する
   e.preventDefault();
   // cityパラメータを渡し、APIの結果を得る
-  const res: ResultState = await Weather(city);
-  console.log(`Weather returned: ${JSON.stringify(res)}`);
+  const res: ResultState = await callWeatherApi(city);
+  console.info(`Weather returned: ${JSON.stringify(res)}`);
   setResult(res);
 }
 

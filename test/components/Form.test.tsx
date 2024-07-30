@@ -9,6 +9,7 @@ import Form from '../../src/components/Form.tsx';
 import '@testing-library/jest-dom';
 import 'cross-fetch/polyfill';
 
+// テスト用のダミーのresultオブジェクト
 const emptyResultState: ResultState = {
   country: '',
   cityName: '',
@@ -45,7 +46,7 @@ test('Formコンポーネントのテスト cityに値がセットされるこ�
   });
 
   await waitFor(() => {
-    console.log(resultState);
+    console.info(resultState);
     expect(resultState.cityName).toEqual('Tokyo'); // cityName
   });
 });

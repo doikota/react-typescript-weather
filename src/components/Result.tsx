@@ -1,5 +1,3 @@
-import React from 'react';
-
 // propsで渡されるResultの型props.result.の形で渡される
 interface ResultProps {
   result: {
@@ -12,6 +10,7 @@ interface ResultProps {
   }
 }
 
+// Resultコンポーネントの定義
 function Result(props : Readonly<ResultProps>) {
   const { result } = props;
   return (

@@ -1,5 +1,4 @@
-import React from 'react';
-
+// Titleコンポーネントの定義
 export function Title() {
   return (
     <div className="Title">

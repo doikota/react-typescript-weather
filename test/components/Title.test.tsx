@@ -16,9 +16,11 @@ describe('Titleコンポーネントのテスト', () => {
     const getByText1 = screen.getByText(title);
     const queryByText1 = screen.queryByText(title);
 
-    // コンポーネントのHTML構造を確認する queryByText1!の"!"ではnullチェックを無視している
+    // コンポーネントのHTML構造を確認する
     screen.debug(getByText1);
-    screen.debug(queryByText1!);
+    if (queryByText1) {
+      screen.debug(queryByText1);
+    }
 
     // レンダリングされたコンポーネント内で特定の要素が存在するかを確認
     expect(getByText1).toBeInTheDocument();

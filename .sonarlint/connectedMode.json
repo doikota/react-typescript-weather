@@ -1,0 +1,4 @@
+{
+    "sonarQubeUri": "http://localhost:9000",
+    "projectKey": "react-typescript-wheather-app"
+}
