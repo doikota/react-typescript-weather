@@ -13,7 +13,7 @@ Local: http://localhost:5173/
 ```
 npm test -- --coverage .
 eslint **/*.*  -f json -o report.json
-sonar-scanner -D sonar.token=<ここにトークンを指定>
+sonar-scanner -D sonar.host.url=http://localhost:9000/ -D sonar.token=<ここにトークンを指定>
 
 SonarQube
 http://localhost:9000/
