@@ -1,4 +1,6 @@
-// Titleコンポーネントの定義
+/**
+ * Titleコンポーネントの定義
+ */
 export function Title() {
   return (
     <div className="Title">

@@ -1,4 +1,12 @@
-// propsで渡されるResultの型props.result.の形で渡される
+/**
+ * ResultPropsはResultコンポーネントに渡されるプロパティの型を定義します。
+ * @property {string} country - 国名
+ * @property {string} cityName - 都市名
+ * @property {string} localtime - 現地時間
+ * @property {string} temperature - 気温
+ * @property {string} conditionText - 天気の状態
+ * @property {string} icon - 天気のアイコンURL
+ */
 interface ResultProps {
   result: {
     country : string
@@ -10,7 +18,11 @@ interface ResultProps {
   }
 }
 
-// Resultコンポーネントの定義
+/**
+ * Resultコンポーネントは天気情報を表示します。
+ * @param {Readonly<ResultProps>} props - コンポーネントに渡されるプロパティ
+ * @returns {JSX.Element} 天気情報を表示するJSX要素
+ */
 function Result(props : Readonly<ResultProps>) {
   const { result } = props;
   return (
